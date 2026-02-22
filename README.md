@@ -13,7 +13,6 @@ A full-stack web application for logging and viewing **Email**, **SMS**, and **W
 - [Configuration](#configuration)
 - [Project Structure](#project-structure)
 - [API Reference](#api-reference)
-- [Deploying to GitHub](#deploying-to-github)
 
 ---
 
@@ -202,27 +201,3 @@ All endpoints return JSON. Request bodies must use `Content-Type: application/js
 }
 ```
 
----
-
-## Deploying to GitHub
-
-1. Create a new repository on GitHub (do not add a README or .gitignore if you already have them locally).
-
-2. From the project root, run:
-
-```bash
-git init
-git add .
-git commit -m "Initial commit: Message Ledger full-stack application"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
-
-Replace `YOUR_USERNAME` and `YOUR_REPO` with your GitHub username and repository name.
-
----
-
-## License
-
-This project is available under the MIT License (or your choice of license).
