@@ -1,0 +1,317 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    color: #e8e8e8;
+}
+
+.app {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.subtitle {
+    margin: 0.25rem 0 0;
+    opacity: 0.85;
+    font-size: 1rem;
+}
+
+/* Multi-channel Compose - centered content, at top */
+.compose-section {
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.compose-section h2 {
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+    color: #a0c4ff;
+}
+
+.channel-options {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.channel-option {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.channel-option:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.channel-option input {
+    margin: 0 0.5rem 0 0;
+    accent-color: #4361ee;
+}
+
+.channel-option input:checked + span {
+    font-weight: 600;
+    color: #7eb8ff;
+}
+
+.compose-form {
+    width: 100%;
+    max-width: 420px;
+    text-align: left;
+}
+
+.compose-form .dynamic-form-group {
+    margin-bottom: 1rem;
+}
+
+.compose-form label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+    color: #c0c0c0;
+}
+
+.compose-form input,
+.compose-form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.compose-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.compose-form #compose-submit-btn {
+    padding: 0.65rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: #4361ee;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.compose-form #compose-submit-btn:hover {
+    background: #5a75f5;
+}
+
+/* List toolbar & export */
+.list-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-export {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e8e8e8;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-export:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #7eb8ff;
+}
+
+/* Forms */
+.forms-section {
+    margin-bottom: 2rem;
+}
+
+.forms-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #a0c4ff;
+}
+
+.forms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.form-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 1.25rem;
+}
+
+.form-card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    color: #7eb8ff;
+}
+
+.send-form label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+    color: #c0c0c0;
+}
+
+.send-form input,
+.send-form textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.send-form input::placeholder,
+.send-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.send-form textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.send-form button {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #4361ee;
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.send-form button:hover {
+    background: #5a75f5;
+}
+
+/* Tabs */
+.tabs-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    border: none;
+    background: transparent;
+    color: #a0a0a0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+}
+
+.tab:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tab.active {
+    color: #7eb8ff;
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom: 2px solid #4361ee;
+}
+
+.tab-panel {
+    padding: 1.25rem;
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* List view */
+.list-view {
+    min-height: 200px;
+}
+
+.list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.list-table th,
+.list-table td {
+    padding: 0.7rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-table th {
+    color: #a0c4ff;
+    font-weight: 600;
+}
+
+.list-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.empty-msg {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 2rem;
+    margin: 0;
+}
