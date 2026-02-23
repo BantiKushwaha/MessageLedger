@@ -51,6 +51,8 @@
                 lastEmails = data;
                 data.forEach(function (row) {
                     var tr = document.createElement('tr');
+                    tr.classList.add('row-new');
+                    tr.addEventListener('animationend', function () { tr.classList.remove('row-new'); }, { once: true });
                     var msg = row.messageSent != null ? row.messageSent : '';
                     tr.innerHTML = '<td>' + row.serialNumber + '</td><td>' + escapeHtml(row.emailTo) + '</td><td>' + escapeHtml(msg) + '</td><td>' + formatTimestamp(row.sentAt) + '</td>';
                     tbody.appendChild(tr);
@@ -78,6 +80,8 @@
                 lastSms = data;
                 data.forEach(function (row) {
                     var tr = document.createElement('tr');
+                    tr.classList.add('row-new');
+                    tr.addEventListener('animationend', function () { tr.classList.remove('row-new'); }, { once: true });
                     tr.innerHTML = '<td>' + row.serialNumber + '</td><td>' + escapeHtml(row.mobileNumber) + '</td><td>' + escapeHtml(row.messageSent) + '</td><td>' + formatTimestamp(row.sentAt) + '</td>';
                     tbody.appendChild(tr);
                 });
@@ -104,6 +108,8 @@
                 lastWhatsapp = data;
                 data.forEach(function (row) {
                     var tr = document.createElement('tr');
+                    tr.classList.add('row-new');
+                    tr.addEventListener('animationend', function () { tr.classList.remove('row-new'); }, { once: true });
                     tr.innerHTML = '<td>' + row.serialNumber + '</td><td>' + escapeHtml(row.mobileNumber) + '</td><td>' + escapeHtml(row.messageSent) + '</td><td>' + formatTimestamp(row.sentAt) + '</td>';
                     tbody.appendChild(tr);
                 });
