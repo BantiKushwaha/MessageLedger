@@ -1,6 +1,10 @@
 # Message Ledger
 
-A full-stack web application for logging and viewing **Email**, **SMS**, and **WhatsApp** messages. Entries are stored in a database and displayed in tabbed list views—no actual messages are sent to external services.
+A full-stack web application for logging and viewing **Email**, **SMS**, and **WhatsApp** messages.
+
+- The **backend** is a Django + Django REST Framework (DRF) API.
+- The **frontend** is plain HTML/CSS/JavaScript served by the backend at `/`.
+- Entries are stored in a database and displayed in tabbed list views—no actual messages are sent to external services.
 
 ---
 
@@ -18,11 +22,11 @@ A full-stack web application for logging and viewing **Email**, **SMS**, and **W
 
 ## Tech Stack
 
-| Layer      | Technologies                          |
-| ---------- | ------------------------------------- |
-| **Frontend** | HTML5, CSS3, Vanilla JavaScript       |
-| **Backend**  | Java 17, Maven, Spring Boot, Spring Data JPA |
-| **Database** | PostgreSQL                            |
+| Layer      | Technologies |
+| ---------- | ------------ |
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript |
+| **Backend**  | Python, Django, Django REST Framework |
+| **Database** | SQLite (default) / PostgreSQL (optional via `DATABASE_URL`) |
 
 ---
 
@@ -38,76 +42,63 @@ A full-stack web application for logging and viewing **Email**, **SMS**, and **W
 
 ## Prerequisites
 
-- **JDK 17** or higher  
-- **Maven 3.6+**  
-- **PostgreSQL** (server running; you will create or use an existing database)
+- **Python 3.10+** (recommended)
+- Optional: **PostgreSQL** (only if you choose to use `DATABASE_URL`)
 
 ---
 
 ## Getting Started
 
-### 1. Clone or download the project
+### 1. Clone the project
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/MessageLedger.git
-cd MessageLedger
+git clone https://github.com/BantiKushwaha/MessageLedger.git
 ```
 
-### 2. Create a database (if needed)
+### 2. Setup backend
 
-Using the PostgreSQL client (e.g. `psql`):
-
-```sql
-CREATE DATABASE postgres;
-```
-
-Or use an existing database and set its name in configuration (see [Configuration](#configuration)).
-
-### 3. Build the application
+From the `Backend/` folder:
 
 ```bash
-mvn clean install
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-### 4. Run the application
+Run migrations:
 
 ```bash
-mvn spring-boot:run
+python manage.py migrate
 ```
 
-### 5. Open in browser
+Start the server:
 
-Navigate to:
+```bash
+python manage.py runserver
+```
 
-**http://localhost:8090**
+### 3. Open in browser
+
+- Frontend: `http://127.0.0.1:8000/`
+- Admin: `http://127.0.0.1:8000/admin/`
+- API base: `http://127.0.0.1:8000/api/`
 
 ---
 
 ## Configuration
 
-Edit `src/main/resources/application.properties` to match your environment:
+Backend reads environment variables from `Backend/.env`.
 
-| Property | Description | Example |
+| Variable | Description | Example |
 | -------- | ----------- | ------- |
-| `server.port` | HTTP port | `8090` |
-| `spring.datasource.url` | JDBC URL | `jdbc:postgresql://localhost:5432/postgres` |
-| `spring.datasource.username` | DB username | `postgres` |
-| `spring.datasource.password` | DB password | `your_password` |
+| `DJANGO_DEBUG` | Debug mode (enables permissive CORS) | `1` |
+| `DJANGO_SECRET_KEY` | Django secret key | `change-me` |
+| `DATABASE_URL` | Optional DB connection string (if omitted, SQLite is used) | `postgres://postgres:1234@localhost:5432/postgres` |
 
-Example:
+Notes:
 
-```properties
-server.port=8090
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
-spring.datasource.username=postgres
-spring.datasource.password=your_password
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-
-spring.jpa.show-sql=true
-spring.jpa.hibernate.ddl-auto=update
-```
+- If you **do not** set `DATABASE_URL`, the backend uses `Backend/db.sqlite3`.
+- The frontend JS uses `API_BASE = ''`, so it calls `/api/...` on the **same host** the backend is running on.
 
 ---
 
@@ -115,36 +106,28 @@ spring.jpa.hibernate.ddl-auto=update
 
 ```
 MessageLedger/
-├── pom.xml
 ├── README.md
-├── src/main/java/com/messageledger/
-│   ├── MessageLedgerApplication.java
-│   ├── config/
-│   │   └── GlobalExceptionHandler.java
-│   ├── controller/
-│   │   ├── EmailLogController.java
-│   │   ├── SmsLogController.java
-│   │   └── WhatsAppLogController.java
-│   ├── dto/
-│   │   ├── SendEmailRequest.java
-│   │   ├── SendSmsRequest.java
-│   │   └── SendWhatsAppRequest.java
-│   ├── entity/
-│   │   ├── EmailLog.java
-│   │   ├── SmsLog.java
-│   │   └── WhatsAppLog.java
-│   └── repository/
-│       ├── EmailLogRepository.java
-│       ├── SmsLogRepository.java
-│       └── WhatsAppLogRepository.java
-└── src/main/resources/
-    ├── application.properties
-    └── static/
-        ├── index.html
-        ├── css/
-        │   └── style.css
-        └── js/
-            └── app.js
+├── Backend/
+│   ├── .env.example
+│   ├── db.sqlite3
+│   ├── manage.py
+│   ├── requirements.txt
+│   ├── api/
+│   │   ├── urls.py
+│   │   ├── serializers.py
+│   │   └── views.py
+│   ├── frontend_app/
+│   │   ├── urls.py
+│   │   └── views.py
+│   └── messageledger_backend/
+│       ├── settings.py
+│       └── urls.py
+└── Frontend/
+    ├── index.html
+    ├── css/
+    │   └── style.css
+    └── js/
+        └── app.js
 ```
 
 ---
@@ -152,6 +135,8 @@ MessageLedger/
 ## API Reference
 
 All endpoints return JSON. Request bodies must use `Content-Type: application/json`.
+
+Base URL: `/api`
 
 ### Emails
 
@@ -200,4 +185,3 @@ All endpoints return JSON. Request bodies must use `Content-Type: application/js
   "messageSent": "Your message text"
 }
 ```
-
